@@ -1,0 +1,29 @@
+
+{{!-- <div class="home"> --}}
+  <h1>ADD YOUR FAVORITE PLACE</h1>
+  <h2>Coffees, shops, bookstores</h2>
+
+  <form action="/add-place" method="post">
+    <label for="Name">Nome</label>
+    <input type="text" name="name" value="">
+
+    <label for="type">Tipo</label>
+    <select name="type" id="">
+      <option value="coffee">Coffee</option>
+      <option value="shop">Shop</option>
+      <option value="bookstore">Bookstore</option>
+    </select>
+    <label for="">Latitude</label>
+    <input type="text" name="latitude">
+    <label for="">Longitude</label>
+    <input type="text" name="longitude">
+    <button type="submit">ENVIAR</button>
+  </form>
+
+  <h1>{{error}}</h1>
+  <h2>{{message}}</h2>
+
+  <a href="/places">
+  <button>SEE PLACES</button>
+  </a>
+{{!-- </div> --}}

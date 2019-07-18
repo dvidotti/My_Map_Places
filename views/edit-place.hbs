@@ -1,0 +1,33 @@
+
+
+<div class="edit">
+
+<h1>EDITE SEU LUGAR FAVORITO</h1>
+
+
+<form action="/edit/{{this._id}}" method="post">
+  <label for="Name">Nome</label>
+  <input type="text" name="name" value="{{this.name}}">
+
+  <label for="type">Tipo</label>
+  <select name="type" id="">
+    <option value="coffee">Coffee</option>
+    <option value="shop">Shop</option>
+    <option value="bookstore">Bookstore</option>
+  </select>
+  <label for="">Latitude</label>
+  <input type="text" name="latitude" value="{{this.location.coordinates.[1]}}">
+  <button type="submit">ENVIAR</button>
+  <label for="">Longitude</label>
+  <input type="text" name="longitude" value="{{this.location.coordinates.[0]}}">
+
+  <button type="submit">ENVIAR</button>
+</form>
+
+<div class="see-places">
+  <a  href="/places">
+  <button>SEE PLACES</button>
+  </a>
+</div>
+</div>
+
