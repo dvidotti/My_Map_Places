@@ -2,14 +2,14 @@
 
 <div class="edit">
 
-<h1>EDITE SEU LUGAR FAVORITO</h1>
+<h1>EDIT YOUR FAVORITE PLACE</h1>
 
 
 <form action="/edit/{{this._id}}" method="post">
-  <label for="Name">Nome</label>
+  <label for="Name">Name</label>
   <input type="text" name="name" value="{{this.name}}">
 
-  <label for="type">Tipo</label>
+  <label for="type">Type</label>
   <select name="type" id="">
     <option value="coffee">Coffee</option>
     <option value="shop">Shop</option>
@@ -17,11 +17,11 @@
   </select>
   <label for="">Latitude</label>
   <input type="text" name="latitude" value="{{this.location.coordinates.[1]}}">
-  <button type="submit">ENVIAR</button>
+  <button type="submit">SEND</button>
   <label for="">Longitude</label>
   <input type="text" name="longitude" value="{{this.location.coordinates.[0]}}">
 
-  <button type="submit">ENVIAR</button>
+  <button type="submit">SEND</button>
 </form>
 
 <div class="see-places">
