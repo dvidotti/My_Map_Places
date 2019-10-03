@@ -1,6 +1,3 @@
-
-
-
   const ironhackSP = {
     lat: -23.5617375,
     lng: -46.6601331

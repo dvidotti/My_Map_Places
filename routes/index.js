@@ -1,12 +1,86 @@
 const express = require('express');
 const router  = express.Router();
-const mongoose     = require('mongoose');
-const Place = require('../models/Places')
+const Place = require('../models/Places');
+const User = require('../models/User')
+const bcrypt = require('bcrypt')
+let bcryptSalt = 10;
 
 /* GET home page */
-router.get('/', (req, res, next) => {
-  res.render('index');
+
+
+
+router.get('/signup', (req, res, next) => {
+  res.render('signup');
 });
+
+router.post('/signup', (req, res, next) => {
+  const {username, password} = req.body;
+
+  if (username === '' || password === '') {
+    res.render('signup', { message: "Username or Password empty" });
+    return;
+  }
+
+  User.findOne({username})
+    .then((user) => {
+      if (user) {
+        console.log('im here')
+        res.render('signup', {message: 'The user already exist'})
+        return;
+      } else {
+        let salt = bcrypt.genSaltSync(bcryptSalt)
+        let hash = bcrypt.hashSync(password, salt)
+        User.create({
+          username,
+          password: hash
+        })
+          .then(user => {
+            console.log(user.username, 'Sucessfully Created')
+            res.redirect('/login')
+          })
+          .catch(error => console.log(error))
+      }
+    })
+    .catch(err => console.log(err))
+});
+
+
+router.get('/login', (req, res, next) => {
+  res.render('login');
+});
+
+router.post('/login', (req, res, next) => {
+  const {username, password} = req.body;
+  
+  if (username === '' || password === '') {
+    res.render('login', { message: "Username or Password empty" });
+    return;
+  }
+
+  User.findOne({username})
+    .then(user => {
+      console.log('--------->', user)
+      if (!user) {
+        res.render('login', { message: " Wrong username or password" });
+        return;
+      } 
+
+        if (bcrypt.compareSync(password, user.password)) {
+          console.log('--aaaa------->', user)
+
+        req.session.currentUser = user._id;
+        res.redirect('/places')
+      } else {
+        res.render('login', { message: " Wrong username or password" });
+        return;
+      }
+    })
+    .catch(error => {
+      next(error);
+    })
+});
+
+
 
 router.get('/api', (req, res, next) => {
   Place.find()
@@ -15,6 +89,21 @@ router.get('/api', (req, res, next) => {
     })
     .catch(error => console.log(error))
 });
+
+
+router.use((req, res, next) => {
+  if(req.session.currentUser) {
+    next();
+  } else {
+    res.redirect('/login')
+  }
+})
+
+
+router.get('/', (req, res, next) => {
+  res.render('index');
+});
+
 
 router.post('/add-place', (req, res, next) => {
   const {name, type} = req.body;
