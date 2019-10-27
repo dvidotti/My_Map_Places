@@ -2,32 +2,43 @@
 
 <div class="edit">
 
-<h1>EDIT YOUR FAVORITE PLACE</h1>
+<h1>EDIT YOUR CITY PIC</h1>
 
+ <form action="/edit/{{this._id}}" method="POST" enctype="multipart/form-data">
+    <input id="place-name" style="visibility:hidden" type="text" name="name" value="{{this.name}}"/>
+    <input id="lat-edit" style="visibility:hidden" type="text" name="latitude" value="{{this.location.coordinates.[1]}}"/>
+    <input id="lng-edit" style="visibility:hidden" type="text" name="longitude" value="{{this.location.coordinates.[0]}}"/>
+    <input id="rotate-input" style="visibility:hidden" type="text" name="rotate" value="{{this.picture.rotate}}"/>
+  
+    <label for="photo-edit" class='photo-label'>
+      <input class="input-photo" id="photo-edit" type="file"  name='photo'/>
+    </label>
 
-<form action="/edit/{{this._id}}" method="post">
-  <label for="Name">Name</label>
-  <input type="text" name="name" value="{{this.name}}">
+    <span id="photo-name-edit"></span>
 
-  <label for="type">Type</label>
-  <select name="type" id="">
-    <option value="coffee">Coffee</option>
-    <option value="shop">Shop</option>
-    <option value="bookstore">Bookstore</option>
-  </select>
-  <label for="">Latitude</label>
-  <input type="text" name="latitude" value="{{this.location.coordinates.[1]}}">
-  <button type="submit">SEND</button>
-  <label for="">Longitude</label>
-  <input type="text" name="longitude" value="{{this.location.coordinates.[0]}}">
+    <h1>CITY</h1>
+    <h2 id="name-edit">{{this.name}}</h2>
+    <label id="search-block" for="search-place">
+      <input type="text" id="search-place" placeholder="Change city"/>
+    <button id="search-address-btn" type="button" onclick="codePlace()">Search place</button>
+    </label>
+    <h2 id="place-question">Choose your location?</h2>
+    <div class="suggestion-list" id="suggestion-list-edit"></div>
+    <button id="submit-add-place" type="submit">SAVE</button>
+  </form>
 
-  <button type="submit">SEND</button>
-</form>
-
-<div class="see-places">
-  <a  href="/places">
-  <button>SEE PLACES</button>
-  </a>
+  <button id="rotate-button">Rotate</button>
+  
+  <picture>
+    <img id="picture-edit" class="{{this.picture.rotate}}" src={{this.picture.path}} alt={{this.name}}>
+  </picture>
+  <div class="see-places">
+    <a  href="/places">Back to Map</a>
+    <a  href="/galery">Back to City Gallery</a>
+  </div>
 </div>
-</div>
+
+<a href="/delete/{{this._id}}">DELETE</a>
+
+<script src="../javascripts/edit-form.js"></script>
 

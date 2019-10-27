@@ -4,6 +4,12 @@
     {
       "type": "node",
       "request": "attach",
+      "name": "Attach",
+      "port": 9229
+    },
+    {
+      "type": "node",
+      "request": "attach",
       "name": "DEBUG Irongenerate",
       "port": 9229,
       "protocol": "inspector",

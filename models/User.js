@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
-  myplaces: [{type: mongoose.Schema.Types.ObjectId, ref: 'Places'}]
+  myplaces: [{type: mongoose.Schema.Types.ObjectId, ref: 'Place'}]
 },
 {
   timestamps: true,

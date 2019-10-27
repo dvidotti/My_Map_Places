@@ -1,0 +1,19 @@
+<div class="home">
+  <div class='right-block'>
+    <h1>YOUR PLACES</h1>
+
+    {{#each places}}
+    <h2>{{this.name}}</h2>
+    
+    <a href="/edit/{{this._id}}">EDIT</a>
+    <a href="/delete/{{this._id}}">DELETE</a>
+    <a href="/upload/{{this._id}}">ADD PHOTO</a>
+    {{/each}}
+
+    <h2>{{message}}</h2>
+
+    <a id="add" href="/">ADD NEW PLACE</a>
+  </div>
+  <div class="left-block" id="map"></div>
+  </div>
+</div>

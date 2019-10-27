@@ -1,20 +1,13 @@
-<div class="home">
-  <div class='right-block'>
-    <h1>YOUR PLACES</h1>
 
-    {{#each place}}
-    <h2>{{this.name}}</h2>
-    <a href="/edit/{{this._id}}">EDIT</a>
-    <a href="/delete/{{this._id}}">DELETE</a>
-    {{/each}}
-
-    <h2>{{message}}</h2>
-
-    <a id="add" href="/">ADD NEW PLACE</a>
+  <a href="/add-place">ADD PLACE</a>
+  <a href="/galery">CITY GALERY</a>
+  
+  <div class="map-block left-block" id="map"></div>
+  <div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
   </div>
-  <div class="left-block" id="map"></div>
-  </div>
-</div>
 
 
 

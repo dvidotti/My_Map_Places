@@ -2,6 +2,9 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
+p {
+  display: inline; }
+
 a {
   color: #00B7FF; }
 
@@ -10,12 +13,24 @@ a {
   width: 100%; }
 
 .home {
-  display: flex;
   justify-content: space-between; }
+
+#photo {
+  display: block; }
+
+.input-photo {
+  visibility: hidden; }
 
 .right-block {
   margin-right: 5%;
   width: 30%; }
+
+.map-block {
+  opacity: 0.6; }
+
+.map-block.left-block {
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1; }
 
 #add {
   font-size: 30px;
@@ -23,29 +38,23 @@ a {
   border: 1px solid black;
   color: white; }
 
-input {
+#search-place {
   display: block;
   width: 150px;
   height: 20px;
-  font-size: 20px;
-  margin: 20px 0; }
-
-label {
-  display: block;
-  width: 150px;
-  height: 20px;
-  font-size: 20px;
-  margin: 20px 0; }
+  font-size: 20px; }
 
 select {
   width: 150px;
   height: 25px; }
 
-button {
-  widows: 150px;
-  height: 25px;
+#search-address-btn, #submit-add-place {
+  height: 35px;
   color: white;
-  background-color: purple; }
+  background-color: purple;
+  margin-top: 15px;
+  font-size: 20px;
+  display: block; }
 
 .see-places {
   margin-top: 20px; }
@@ -59,4 +68,197 @@ a {
   background-color: black;
   color: white; }
 
-/*# sourceMappingURL=style.css.map */
+#lat, #lng, #place-name {
+  height: 0px;
+  margin: 0px; }
+
+.photo-label {
+  background-image: url("../images/camera.jpg");
+  background-size: contain;
+  width: 90px;
+  height: 90px;
+  display: block;
+  font-size: 20px;
+  margin-bottom: 20px; }
+
+#search-block {
+  display: block; }
+
+.search-address-btn {
+  display: block;
+  margin-top: 40px;
+  visibility: hidden; }
+
+#place-question {
+  visibility: hidden;
+  margin-top: 20px; }
+
+#submit-add-place {
+  visibility: hidden; }
+
+#photo-name, #photo-name-edit {
+  color: #4f9d4f;
+  font-size: 1.2em; }
+
+#checked {
+  margin-left: 10px; }
+
+#suggestion-list, #suggestion-list-edit {
+  width: 100%;
+  height: 100%;
+  background-color: #d8b6c1;
+  font-size: 1.2em; }
+
+#suggestion-list:hover, #suggestion-list-edit:hover {
+  background-color: purple;
+  color: white;
+  cursor: pointer; }
+
+#photo-galery {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap; }
+
+.photo-pic {
+  width: 28vw;
+  height: 28vw;
+  border: 1px solid white;
+  position: relative;
+  overflow: hidden; }
+
+.photo-pic:hover:before {
+  content: attr(name);
+  position: absolute;
+  top: 50%;
+  /* position the top  edge of the element at the middle of the parent */
+  left: 50%;
+  /* position the left edge of the element at the middle of the parent */
+  transform: translate(-50%, -50%);
+  font-size: 1.4em;
+  color: white; }
+
+.photo-pic:hover {
+  opacity: 0.7; }
+
+.photo-pic:hover:after {
+  content: "EDIT";
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  font-size: 1.4em;
+  color: white; }
+
+.pic-image {
+  width: 30vw;
+  height: 30vw;
+  object-fit: cover; }
+
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s; }
+
+#myImg:hover {
+  opacity: 0.7; }
+
+/* The Modal (background) */
+.modal {
+  opacity: 0;
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 0px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 10%;
+  /* Full width */
+  height: 10%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgba(255, 255, 255, 0.7);
+  /* Black w/ opacity */ }
+
+.modal.is-active {
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  display: block; }
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px; }
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px; }
+
+/* Add Animation */
+.modal-content, #caption {
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.0s;
+  animation-name: zoom;
+  animation-duration: 0.0s; }
+
+.modal-content {
+  image-orientation: from-image; }
+
+@-webkit-keyframes zoom {
+  from {
+    -webkit-transform: scale(0); }
+  to {
+    -webkit-transform: scale(1); } }
+
+@keyframes zoom {
+  from {
+    transform: scale(0); }
+  to {
+    transform: scale(1); } }
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: black;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s; }
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer; }
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+  .modal-content {
+    width: 100%; } }
+
+    
+    /*# sourceMappingURL=style.css.map */
+.rotate90deg {
+  transform: rotate(90deg); }
+
+.rotate180deg {
+  transform: rotate(180deg); }
+
+.rotate270deg {
+  transform: rotate(270deg); }
+
+.rotate360deg {
+  transform: rotate(360deg); }
