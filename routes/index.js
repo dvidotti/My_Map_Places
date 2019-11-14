@@ -5,7 +5,7 @@ const User = require('../models/User')
 const bcrypt = require('bcrypt')
 let bcryptSalt = 10;
 const multer       = require('multer');
-const upload       = multer({dest: './public/uploads/'});
+// const upload       = multer({dest: './public/uploads/'});
 const uploadCloud = require('../config/cloudinary.js');
 const Picture      = require('../models/Pictures')
 
@@ -138,11 +138,11 @@ router.get('/upload', (req, res, next) => {
 })
 
 
-router.post('/upload/:id', upload.single('photo'), (req, res) => {
+router.post('/upload/:id', uploadCloud.single('photo'), (req, res) => {
 
   const pic = {
     name: req.body.name,
-    path: `/uploads/${req.file.filename}`,
+    path: `${req.file.url}`,
     originalName: req.file.originalname
   };
 
@@ -272,11 +272,12 @@ router.get('/delete/:id', (req, res, next) => {
   const placeId = req.params.id;
   Place.findByIdAndDelete(placeId)
   .then(place => {
-    res.redirect('/places')
+    res.redirect('/galery')
   })
 })
 
-router.get('/edit/:id', upload.single('photo'), (req, res, next) => {
+// need to delete picture as weel //
+router.get('/edit/:id', (req, res, next) => {
   const placeId = req.params.id;
   Place.findById(placeId).populate('picture')
   .then(place => {
@@ -284,7 +285,7 @@ router.get('/edit/:id', upload.single('photo'), (req, res, next) => {
   })
 })
 
-router.post('/edit/:place', upload.single('photo'), (req, res, next) => {
+router.post('/edit/:place', uploadCloud.single('photo'), (req, res, next) => {
   const id = req.params.place;
   const { name, type, latitude, longitude, rotate  } = req.body;
   let location = {
@@ -297,7 +298,6 @@ router.post('/edit/:place', upload.single('photo'), (req, res, next) => {
   Place.findByIdAndUpdate(id, {name: name, type: type, location: location}).populate('picture')
   .then(place => { 
     if(req.file === undefined) {
-      console.log('NAME ---------------->', name)
         const pic = {
           name:name,
           rotate,
@@ -305,28 +305,26 @@ router.post('/edit/:place', upload.single('photo'), (req, res, next) => {
 
         Picture.findByIdAndUpdate(place.picture._id, pic)
           .then(pic => {
-            res.redirect('/places')
+            res.redirect('/galery')
           })
           .catch(err => console.log(err))
 
     } else {
         const pic = {
           name: name,
-          path: `/uploads/${req.file.filename}`,
+          path: `${req.file.url}`,
           originalName: req.file.originalname,
           rotate,
         };
 
         Picture.findByIdAndUpdate(place.picture._id, pic)
           .then(pic => {
-            res.redirect('/places')
+            res.redirect('/galery')
           })
           .catch(err => console.log(err))
       }
     })
     .catch(err => console.log(err))
   })
-
-
 
 module.exports = router;
