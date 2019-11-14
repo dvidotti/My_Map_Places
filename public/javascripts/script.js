@@ -142,7 +142,6 @@ function getAllPlaces() {
 
  function markPlaces(places){
   places.forEach((place) => {
-    console.log(place)
     const center = {
       lat: place.location.coordinates[1],
       lng: place.location.coordinates[0]

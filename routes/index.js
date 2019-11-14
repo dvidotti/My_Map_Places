@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt')
 let bcryptSalt = 10;
 const multer       = require('multer');
 const upload       = multer({dest: './public/uploads/'});
+const uploadCloud = require('../config/cloudinary.js');
 const Picture      = require('../models/Pictures')
 
 /* GET home page */
@@ -118,7 +119,7 @@ router.use((req, res, next) => {
   if(req.session.currentUser) {
     next();
   } else {
-    res.redirect('/login')
+    res.redirect('/')
   }
 });
 
@@ -149,7 +150,7 @@ router.post('/upload/:id', upload.single('photo'), (req, res) => {
   .then(picture =>{
     Place.findByIdAndUpdate(req.params.id, {$set: {picture: picture}})
       .then(place => {
-        res.redirect('/places')
+        res.redirect('/galery')
       })
   })
   .catch(err => console.log(err))
@@ -157,7 +158,7 @@ router.post('/upload/:id', upload.single('photo'), (req, res) => {
 
 
 
-router.post('/add-place', upload.single('photo'), (req, res, next) => {
+router.post('/add-place', uploadCloud.single('photo'), (req, res, next) => {
   const {name, type} = req.body;
   let location = {
     type: 'Point',
@@ -199,14 +200,14 @@ router.post('/add-place', upload.single('photo'), (req, res, next) => {
               User.findByIdAndUpdate(req.session.currentUser, {$push: {myplaces: place}})
                 .then(user => console.log('sucess', user))
                 .catch(err => console.log(err))
-              res.render('index', {message: `${place.name} saved`})
+              res.redirect('/galery');
             })
           })
         .catch(err => console.log(err))
       } else {
           Picture.create({
             name,
-            path: `/uploads/${req.file.filename}`,
+            path: `${req.file.url}`,
             originalName: req.file.originalname
           })
           .then(picture => {
@@ -217,7 +218,7 @@ router.post('/add-place', upload.single('photo'), (req, res, next) => {
                 User.findByIdAndUpdate(req.session.currentUser, {$push: {myplaces: place}})
                   .then(user => console.log('sucess', user))
                   .catch(err => console.log(err))
-                res.render('index', {message: `${place.name} saved`})
+                res.redirect('/galery');              
               })
             })
           .catch(err => console.log(err))

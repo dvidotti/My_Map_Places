@@ -1,6 +1,7 @@
 
 let inputPhoto = document.getElementById('photo');
 let photoName = document.getElementById('photo-name');
+let photoPreview = document.getElementById('photo-preview')
 
 inputPhoto.onchange = () => {
     if (inputPhoto) { 
