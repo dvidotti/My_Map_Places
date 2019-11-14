@@ -26,7 +26,7 @@
 
  <form id="add-place" action="/edit/{{this._id}}" method="POST" enctype="multipart/form-data">
     <h2>EDIT CITY PIC</h2>
-    <input id="place-name" style="visibility:hidden" type="text" name="name" value="{{this.name}}"/>
+    <input id="place-name-edit" style="visibility:hidden" type="text" name="name" value="{{this.name}}"/>
     <input id="lat-edit" style="visibility:hidden" type="text" name="latitude" value="{{this.location.coordinates.[1]}}"/>
     <input id="lng-edit" style="visibility:hidden" type="text" name="longitude" value="{{this.location.coordinates.[0]}}"/>
     <input id="rotate-input" style="visibility:hidden" type="text" name="rotate" value="{{this.picture.rotate}}"/>

@@ -25,7 +25,9 @@ let geocoder;
   let latEdit;
   let lngEdit;
   let placeName;
+  let placeNameEdit
   let nameInput = document.getElementById('place-name')
+  let nameInputEdit = document.getElementById('place-name-edit')
   let latInput = document.getElementById('lat');
   let lngInput = document.getElementById('lng');
   let latInputEdit = document.getElementById('lat-edit');
@@ -53,10 +55,6 @@ let geocoder;
 
 
   function initialize() {
-    // nameInput.style.visibility = "hidden"
-    // latInput.style.visibility = "hidden"
-    // lngInput.style.visibility = "hidden"
-    // geocoder = new google.maps.Geocoder();
     let latlng = new google.maps.LatLng(-17, -5.6601331);
     let mapOptions = {
       zoom: 2,
@@ -71,7 +69,6 @@ let geocoder;
 
   function codePlace() {
     placeQuestion.style.visibility = "visible";
-    // gecocoder = new google.maps.Geocoder();
     let place = document.getElementById('search-place').value;
     geocoder.geocode( { 'address': place}, function(results, status) {
       mapResult = results
@@ -81,19 +78,13 @@ let geocoder;
         } if (addressListEdit !== null) {
           addressListEdit.innerHTML = `<span onclick="setPlaceInfoEdit()" id="suggestion-link-edit-text">${results[0].formatted_address}</span>`;
         }
-        // map.setCenter(results[0].geometry.location);
+        // map.setCenter(results[0].geometry.location);  
         lat = results[0].geometry.location.lat();
         lng = results[0].geometry.location.lng();
         latEdit = results[0].geometry.location.lat()
         lngEdit = results[0].geometry.location.lng();
         placeName = mapResult[0].address_components[0].long_name
-        // let marker = new google.maps.Marker({
-        //     map: map,
-        //     icon: image,
-        //     shape: shape,
-        //     position: results[0].geometry.location
-
-        // });
+        placeNameEdit = mapResult[0].address_components[0].long_name
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
       }
@@ -110,10 +101,9 @@ let geocoder;
   }
 
   function setPlaceInfoEdit() {
-    saveBtn.style.visibility = 'visible';
-    nameInput.innerHTML = `<h1>${placeName}</h1>`;
-    nameInput.value = placeName;
-    nameEdit.textContent = placeName;
+    nameInputEdit.innerHTML = `<h1>${placeNameEdit}</h1>`;
+    nameInputEdit.value = placeNameEdit;
+    nameEdit.textContent = placeNameEdit;
     latInputEdit.value = latEdit;
     lngInputEdit.value = lngEdit;
   }
