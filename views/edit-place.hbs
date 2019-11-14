@@ -1,10 +1,31 @@
+<section class="fixed-navbar">
+  <nav id="navbar">
+    <a href="/galery">
+      <picture>
+        <h3>Gal</h3>
+        {{!-- <img src="" alt=""> --}}
+      </picture>
+    </a>
+    <a href="/add-place">
+      <picture>
+        {{!-- <img src="" alt=""> --}}
+        <h3>Add</h3>
+      </picture>
+    </a>
+    <a href="/places">
+      <picture>
+      <h3>Map</h3>
 
+        {{!-- <img src="" alt=""> --}}
+      </picture>
+    </a>
+  </nav>
+</section>
 
-<div class="edit">
+<div class="form-block">
 
-<h1>EDIT YOUR CITY PIC</h1>
-
- <form action="/edit/{{this._id}}" method="POST" enctype="multipart/form-data">
+ <form id="add-place" action="/edit/{{this._id}}" method="POST" enctype="multipart/form-data">
+    <h2>EDIT CITY PIC</h2>
     <input id="place-name" style="visibility:hidden" type="text" name="name" value="{{this.name}}"/>
     <input id="lat-edit" style="visibility:hidden" type="text" name="latitude" value="{{this.location.coordinates.[1]}}"/>
     <input id="lng-edit" style="visibility:hidden" type="text" name="longitude" value="{{this.location.coordinates.[0]}}"/>
@@ -13,10 +34,18 @@
     <label for="photo-edit" class='photo-label'>
       <input class="input-photo" id="photo-edit" type="file"  name='photo'/>
     </label>
+    <div id="change-text">Change Pic</div>
 
     <span id="photo-name-edit"></span>
+    <button type="button" id="rotate-button">Rotate</button>
+    <picture class="photo-pic">
+      <div id="picture-edit"  class="{{this.picture.rotate}}">
+        <img id="pic-image" class="pic-image-edit" src={{this.picture.path}} alt={{this.name}}></img>
+      </div>
+    </picture>
 
-    <h1>CITY</h1>
+    <button id="delete-btn"><a id="delete-link" href="/delete/{{this._id}}">DELETE CITI PIC</a></button>
+    <h2>CITY</h2>
     <h2 id="name-edit">{{this.name}}</h2>
     <label id="search-block" for="search-place">
       <input type="text" id="search-place" placeholder="Change city"/>
@@ -24,21 +53,14 @@
     </label>
     <h2 id="place-question">Choose your location?</h2>
     <div class="suggestion-list" id="suggestion-list-edit"></div>
-    <button id="submit-add-place" type="submit">SAVE</button>
+    <button id="submit-edit-place" type="submit">SAVE</button>
   </form>
 
-  <button id="rotate-button">Rotate</button>
   
-  <picture>
-    <img id="picture-edit" class="{{this.picture.rotate}}" src={{this.picture.path}} alt={{this.name}}>
-  </picture>
-  <div class="see-places">
-    <a  href="/places">Back to Map</a>
-    <a  href="/galery">Back to City Gallery</a>
-  </div>
+  
+
 </div>
 
-<a href="/delete/{{this._id}}">DELETE</a>
 
 <script src="../javascripts/edit-form.js"></script>
 

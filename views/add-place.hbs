@@ -1,33 +1,50 @@
-<div class="home">
+<section class="fixed-navbar">
+  <nav id="navbar">
+    <a href="/galery">
+      <picture>
+        <h3>Galery</h3>
+        {{!-- <img src="" alt=""> --}}
+      </picture>
+    </a>
+    <a href="/feed">
+      <picture>
+        {{!-- <img src="" alt=""> --}}
+        <h3>Feed</h3>
+      </picture>
+    </a>
+    <a href="/places">
+      <picture>
+      <h3>Map</h3>
 
+        {{!-- <img src="" alt=""> --}}
+      </picture>
+    </a>
+  </nav>
+</section>
 
+<div class='form-block'>
+  <form id="add-place" action="/add-place" method="POST" enctype="multipart/form-data">
+    <h2>NEW CITY PIC</h2>
+    <input style="visibility:hidden" id="place-name" type="text" name="name"/>
+    <input style="visibility:hidden" id="lat" type="text" name="latitude"/>
+    <input style="visibility:hidden"id="lng" type="text" name="longitude"/>
 
-  <div class='right-block'>
-    <h2>ADD A NEW CITY PIC</h2>
-    <form id="add-place" action="/add-place" method="POST" enctype="multipart/form-data">
-      <input style="visibility:hidden" id="place-name" type="text" name="name"/>
-      <input style="visibility:hidden" id="lat" type="text" name="latitude"/>
-      <input style="visibility:hidden"id="lng" type="text" name="longitude"/>
+    <label for="photo" class='photo-label'>
+      <input class="input-photo" id="photo" type="file"  name='photo'/>
+    </label>
 
-      <label for="photo" class='photo-label'>
-        <input class="input-photo" id="photo" type="file"  name='photo'/>
-      </label>
-
-      <span id="photo-name"></span>
-      
-      <label id="search-block" for="search-place">
-        <input  type="text" id="search-place" placeholder="City Name"/>
-        <button id="search-address-btn" type="button" onclick="codePlace()">Search place</button>
-      </label>
-      <h2 id="place-question">Choose your location?</h2>
-      <div id="suggestion-list"></div>
-      <button id="submit-add-place" type="submit">SAVE</button>
-    </form>
-    <h2>{{message}}</h2>
-  </div>
-  <div class="see-places">
-    <a  href="/places">Back to Map</a>
-    <a  href="/galery">Back to City Gallery</a>
-  </div>
+    <span id="photo-name"></span>
+    
+    <label id="search-block" for="search-place">
+      <input  type="text" id="search-place" placeholder="City Name"/>
+      <button id="search-address-btn" type="button" onclick="codePlace()">Search place</button>
+    </label>
+    <h2 id="place-question">Choose city?</h2>
+    <div id="suggestion-list"></div>
+    <button id="submit-add-place" type="submit">SAVE</button>
+  </form>
+  <h2>{{message}}</h2>
 </div>
+
+
 <script src="javascripts/add-form.js"></script>

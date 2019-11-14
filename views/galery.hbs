@@ -1,8 +1,30 @@
 
-<h1>CITY GALERY</h1>
-<a href="/places">MAP PLACES</a>
+
+{{!-- <a href="/places">MAP PLACES</a> --}}
+<section class="fixed-navbar">
+  <nav id="navbar">
+    <a href="/feed">
+      <picture>
+        <h3>Feed</h3>
+        {{!-- <img src="" alt=""> --}}
+      </picture>
+    </a>
+    <a href="/add-place">
+      <picture>
+        {{!-- <img src="" alt=""> --}}
+        <h3>Add</h3>
+      </picture>
+    </a>
+    <a href="/places">
+      <picture>
+      <h3>Map</h3>
+
+        {{!-- <img src="" alt=""> --}}
+      </picture>
+    </a>
+  </nav>
+</section>
 <section id="photo-galery">
-    {{!-- <h1>{{user.myplaces}}</h1> --}}
     {{#each user.myplaces}}
         
             <picture name={{this.name}} class="photo-pic">

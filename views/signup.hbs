@@ -1,9 +1,30 @@
-<h1>Don't have an account? SignUp</h1>
-<form action="./signup" method="POST">
-  <input type="text" name="username" placeholder=" Username"/>
-  <input type="password" name="password" placeholder="Password"/>
-  <button type="submit">Signup</button>
-</form>
+<section id="photo-galery">
 
-<h2>Already has an account</h2>
-<a href="/login">Login</a>
+  <div id="photo-gallery-content">
+    {{#each pictures}}
+        
+            <picture name="{{name}}" class="photo-pic">
+                <div class={{rotate}}>
+                  <img class="pic-image" src={{path}} alt="{{name}}">
+                </div>
+            </picture>
+        
+    {{/each}} 
+  </div>
+</section>
+
+
+<section id="auth-page">
+  <div id="auth-block">
+    <h1>Picty</h1>
+    <h2>Sign Up</h2>
+    <form id="login-form"action="./signup" method="POST">
+      <input class="input-form" type="text" name="username" placeholder=" Username"/>
+      <input class="input-form" type="password" name="password" placeholder="Password"/>
+      <button class="button-form" type="submit">Sign Up</button>
+    </form>
+
+    <h2>Already has an account</h2>
+    <a id="blocked-link" href="/">Login</a>
+  </div>
+</section>

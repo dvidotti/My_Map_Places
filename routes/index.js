@@ -12,8 +12,21 @@ const Picture      = require('../models/Pictures')
 
 
 
+router.get('/', (req, res, next) => {
+  Picture.find()
+    .then(pictures => {
+      res.render('login', {pictures})
+    })
+    .catch(err => console.log(err));
+});
+
+
 router.get('/signup', (req, res, next) => {
-  res.render('signup');
+  Picture.find()
+    .then(pictures => {
+      res.render('signup', {pictures})
+    })
+    .catch(err => console.log(err));
 });
 
 router.post('/signup', (req, res, next) => {
@@ -39,7 +52,7 @@ router.post('/signup', (req, res, next) => {
         })
           .then(user => {
             console.log(user.username, 'Sucessfully Created')
-            res.redirect('/login')
+            res.redirect('/')
           })
           .catch(error => console.log(error))
       }
@@ -47,10 +60,6 @@ router.post('/signup', (req, res, next) => {
     .catch(err => console.log(err))
 });
 
-
-router.get('/login', (req, res, next) => {
-  res.render('login');
-});
 
 router.post('/login', (req, res, next) => {
   const {username, password} = req.body;
@@ -68,10 +77,8 @@ router.post('/login', (req, res, next) => {
       } 
 
         if (bcrypt.compareSync(password, user.password)) {
-          console.log('--aaaa------->', user)
-
         req.session.currentUser = user._id;
-        res.redirect('/places')
+        res.redirect('/feed')
       } else {
         res.render('login', { message: " Wrong username or password" });
         return;
@@ -88,7 +95,7 @@ router.get('/api', (req, res, next) => {
     path:'myplaces',
     populate: {path: 'picture'}})
     .then(user => {
-      res.status(200).json( user.myplaces);
+      res.status(200).json(user.myplaces);
     })
     .catch(error => console.log(error))
 });
@@ -116,16 +123,14 @@ router.use((req, res, next) => {
 });
 
 
-router.get('/', (req, res, next) => {
-  res.render('index');
-});
 
-// router.get('/all-places', (req, res, next) => {
-//   Place.find()
-//   .then(place => {
-//     res.render('all-places', { place })
-//   })
-// })
+
+router.get('/feed', (req, res, next) => {
+  Place.find().populate('picture')
+  .then(places => {
+    res.render('all-places', { places })
+  })
+})
 
 router.get('/upload', (req, res, next) => {
   res.render('myplace')
@@ -242,6 +247,7 @@ router.get('/places', (req, res, next) => {
     populate: {path: 'picture'}
   })
     .then(user => {
+      console.log('...............',user)
       res.render('places', { user })
     })
     .catch(err => console.log(err))
@@ -254,6 +260,7 @@ router.get('/galery', (req, res, next) => {
     populate: {path: 'picture'}
   })
     .then(user => {
+      
       res.render('galery', { user })
     })
     .catch(err => console.log(err))

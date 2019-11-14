@@ -1,10 +1,31 @@
-<h1>CityPic</h1>
 
-<form action="/login" method="POST">
-  <input type="text" name="username" placeholder=" Username"/>
-  <input type="password" name="password" placeholder="Password"/>
-  <button type="submit">Login</button>
-</form>
+<section id="photo-galery-home">
 
-<h1>Don't have an account</h1>
-<a href="/signup">SignUP</a>
+  <div id="photo-gallery-content-home">
+    {{#each pictures}}
+        
+            <picture name="{{name}}" class="photo-pic">
+                <div class={{rotate}}>
+                  <img class="pic-image" src={{path}} alt="{{name}}">
+                </div>
+            </picture>
+        
+    {{/each}} 
+  </div>
+</section>
+
+
+<section id="auth-page">
+  <div id="auth-block">
+    <h1>Picty</h1>
+    <h2>Your word city gallery</h2>
+    <form id="login-form"action="/login" method="POST">
+      <input class="input-form" type="text" name="username" placeholder=" Username"/>
+      <input class="input-form" type="password" name="password" placeholder="Password"/>
+      <button class="button-form" type="submit">Login</button>
+    </form>
+
+    <h3>Don't have an account</h3>
+    <a id="blocked-link" href="/signup">SignUP</a>
+  </div>
+</section>

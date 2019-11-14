@@ -1,19 +1,37 @@
-<div class="home">
-  <div class='right-block'>
-    <h1>YOUR PLACES</h1>
+<section class="fixed-navbar">
+  <nav id="navbar">
+    <a href="/galery">
+      <picture>
+        <h3>Gal</h3>
+        {{!-- <img src="" alt=""> --}}
+      </picture>
+    </a>
+    <a href="/add-place">
+      <picture>
+        {{!-- <img src="" alt=""> --}}
+        <h3>Add</h3>
+      </picture>
+    </a>
+    <a href="/places">
+      <picture>
+      <h3>Map</h3>
 
+        {{!-- <img src="" alt=""> --}}
+      </picture>
+    </a>
+  </nav>
+</section>
+
+<section id="photo-feed">
+  <div id="photo-feed-content">
     {{#each places}}
-    <h2>{{this.name}}</h2>
-    
-    <a href="/edit/{{this._id}}">EDIT</a>
-    <a href="/delete/{{this._id}}">DELETE</a>
-    <a href="/upload/{{this._id}}">ADD PHOTO</a>
-    {{/each}}
-
-    <h2>{{message}}</h2>
-
-    <a id="add" href="/">ADD NEW PLACE</a>
+        
+            <picture name="{{this.name}}" class="photo-pic">
+                <div class={{this.picture.rotate}}>
+                  <img class="pic-image" src="{{this.picture.path}}" alt="{{this.name}}">
+                </div>
+            </picture>
+        
+    {{/each}} 
   </div>
-  <div class="left-block" id="map"></div>
-  </div>
-</div>
+</section>

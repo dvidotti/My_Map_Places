@@ -158,7 +158,7 @@ function getAllPlaces() {
       modal.classList.toggle('is-active')
       mapBlock.classList.toggle('left-block');
       modalImg.src = pin.url;
-      captionText.innerHTML = this.alt;
+      captionText.innerHTML = place.name;
     });
     // markers.push(pin);
   });
