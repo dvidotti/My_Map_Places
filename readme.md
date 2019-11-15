@@ -27,8 +27,8 @@ npm install
 
 ### Purpose
 
-- Have an app that store city memories and make it available in a map.
-- Create city galeries.
+- Have an app that stores city memories and make it available in a map.
+- Create city galleries.
 
 ## Next changes
 
