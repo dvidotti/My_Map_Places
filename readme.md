@@ -29,6 +29,12 @@ npm install
 - Have an app that store city memories and make it available in a map.
 - Create city galeries.
 
+## Next changes
+
+- Split server and App [ RESTful-API & React (Serverless)]. 
+- Algorithm for Feed. 
+- Search bar.
+
 ## Contributing
 
 A lot to do in CSS, new features to add and performance issues to solve, feel free to help! [this repository](https://github.com/dvidotti/My_Map_Places).
