@@ -23,6 +23,7 @@ npm install
 ```
 * ADD .env with your Cloudnary KEY, NAME and PASSWORD. Inside .env add also your MONGO_URI address.
 * ADD your API GOOGLE KEY.
+* npm run dev *to development
 
 ### Purpose
 
