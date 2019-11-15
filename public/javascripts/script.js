@@ -71,6 +71,7 @@ let geocoder;
     placeQuestion.style.visibility = "visible";
     let place = document.getElementById('search-place').value;
     geocoder.geocode( { 'address': place}, function(results, status) {
+      console.log(results)
       mapResult = results
       if (status == 'OK') {
         if (addressList !== null) {

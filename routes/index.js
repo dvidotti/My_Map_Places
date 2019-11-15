@@ -158,7 +158,7 @@ router.post('/upload/:id', uploadCloud.single('photo'), (req, res) => {
 
 
 
-router.post('/add-place', uploadCloud.single('photo'), (req, res, next) => {
+router.post('/add-place', uploadCloud.single('photo', {quality: 60}), (req, res, next) => {
   const {name, type} = req.body;
   let location = {
     type: 'Point',
@@ -205,9 +205,12 @@ router.post('/add-place', uploadCloud.single('photo'), (req, res, next) => {
           })
         .catch(err => console.log(err))
       } else {
+         let picPath = req.file.url;
+         let newPath = picPath.split('upload/');
+         newPath.splice(1, 0 ,'upload/q_40/');
           Picture.create({
             name,
-            path: `${req.file.url}`,
+            path: newPath.join(''),
             originalName: req.file.originalname
           })
           .then(picture => {
@@ -260,8 +263,7 @@ router.get('/galery', (req, res, next) => {
     path:'myplaces',
     populate: {path: 'picture'}
   })
-    .then(user => {
-      
+    .then(user => {     
       res.render('galery', { user })
     })
     .catch(err => console.log(err))
